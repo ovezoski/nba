@@ -83,35 +83,20 @@
 
     <?php
     require "header.php";
-      $id = $this->team[0][0];
+      $id = $this->team;
+    
     ?>
 
     <div id="players">
 
     </div>
 
-    <form id="form" action="<?= URL ?>/players/create/<?= $id ?>"  method="post">
 
-      <div id="aditional-players">
-
-      </div>
-
-      <button type="button"  name="button" id="add-player">+</button>
-
-      <input type="submit" name="" value="Create">
-
-
-</form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 
-  $("#add-player").on("click", function(){
-    $("#aditional-players").prepend("<div class='player'><input type='text' name='players[]'>"+
-
-    "</div>")
-  });
 
 renderPlayers();
 
@@ -120,14 +105,13 @@ function renderPlayers(){
         type: "GET",
         url: "<?= URL."/teams/get/".$id  ?>",
         success: function(data){
+          console.log(data);
           $("#players").html("");
           data = JSON.parse(data);
           data.forEach(function(element){
             console.log(element);
             $("#players").prepend(
-              "<div> <button><a href='<?= URL ?>/players/edit/"+element.id+"' >edit</button>"+
-              "</a> <button class='delete' rel='"+ element.id+
-              "' >X</button>"+
+              "<div>"+
               "<a href='<?= URL ?>/players/preview/"+element.id+"' >"+element.name+"</a>"+
               "<img src='"+element.picture+"'/' width='100'>"+
               "</div>"
@@ -139,7 +123,14 @@ function renderPlayers(){
           $(".delete").click(function(){
 
             delId = $(this).attr("rel");
-        
+            $.ajax({
+              type: "GET",
+              url: "<?= URL ?>/players/delete/"+delId,
+              success: function(res){
+                console.log(res);
+                renderPlayers();
+              }
+            });
 
           });
 

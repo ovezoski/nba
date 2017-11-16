@@ -38,7 +38,7 @@
 				data = JSON.parse(data);
 				data.forEach(function(element){
 					var Name =	element.id;
-					$("#teams").prepend("<a href='<?= URL ?>/teams/edit/"+Name+"'><div> "+element.name+" </div>");
+					$("#teams").prepend("<a href='<?= URL ?>/teams/view/"+Name+"'><div> "+element.name+" </div>");
 				});
 			}
 

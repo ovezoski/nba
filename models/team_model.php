@@ -50,11 +50,11 @@ class team extends model
     }
   }
 
-  public function edit($team = false)
+  public function getId($team = false)
   {
     if($team){
 
-      $find_team = $this->db->prepare("Select * from teams where id='".$team."' ");
+      $find_team = $this->db->prepare("Select id from teams where id='".$team."' ");
       $find_team->execute();
       if($find_team->rowCount()){
 

@@ -9,12 +9,14 @@ class player extends model
   }
 
   public function create($id){
+
     $players = $_POST["players"];
 
     foreach($players as $player){
 
       $query = $this->db->prepare("INSERT INTO players (name, team_id) VALUES ('".$player."', '".$id."')");
       $query->execute();
+
 
     }
   }
@@ -27,7 +29,10 @@ class player extends model
         echo json_encode($get_player->fetchAll());
     }
     else{
-      echo "all";
+      $get_all = $this->db->prepare("SELECT * FROM players");
+      $get_all->execute();
+      echo json_encode($get_all->fetchAll());
+
     }
 
   }
@@ -39,9 +44,10 @@ class player extends model
     $delete->execute();
   }
 
-  public function addDesc($value='')
+  public function addDescription($id)
   {
-    # code...
+    $add_description = $this->db->prepare("UPDATE players SET description='".$_POST["description"]."' WHERE id = ".$id." ");
+    $add_description->execute();
   }
 
   public function addVideo($id)
@@ -50,6 +56,13 @@ class player extends model
     $add_video = $this->db->prepare("INSERT INTO videos (player_id, link) VALUES('".$id."', '".$video."')");
     $add_video->execute();
   }
+  public function addPhoto($link, $id)
+  {
+    $add_link = $this->db->prepare("UPDATE players SET picture='".$link."' where id=".$id." ");
+    print_r($add_link);
+    $add_link->execute();
+  }
+
   public function getVideos($id=false)
   {
     $get_videos = $this->db->prepare("SELECT * FROM videos WHERE player_id = '".$id."' ");

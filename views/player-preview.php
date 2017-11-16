@@ -45,13 +45,7 @@
     <div id="player">
 
       <picture>
-        <form class="" action="<?= URL ?>/players/addphoto/<?php  echo $this->player_id; ?>" method="post">
 
-          <input type="text" name="picture-src" placeholder="Link to picture">
-
-        </form>
-
-       <a href="<?= URL ?>/upload">Upload</a>
     </picture>
 
       <name>
@@ -70,29 +64,9 @@
     </div>
 
 
-  <form class=""  method="post">
-    <div class="">
-      Add video: <input type="text" name="video" value="">
-    </div>
-
-    <input type="submit" name="" value="">
-  </form>
 
 
 
-<form action="<?= URL ?>/players/image" enctype="multipart/form-data" method="post">
-
-  <input type='file'>
-  <select>
-    <option>Point Guard</option>
-    <option>Shooting Guard</option>
-    <option>Power Forward</option>
-    <option>Small Forward</option>
-    <option>Center</option>
-
-  <select>
-
-</form>
 
   <div id="videos">
 
@@ -116,10 +90,8 @@
           $("#player team").html(data[0].team_id);
           if(data[0].description){
             $("#description").html(
-            "<form method=\"post\" action='<?= URL ?>/players/edit/<?= $this->player_id ?>'>"+
-                  "<textarea id='description' name=\"description\">"+data[0].description+"</textarea>"+
-                  "<input type=\"submit\" value=\"Save\">"+
-            "</form>");
+                "<div id='description' name=\"description\">"+data[0].description+"</div>"
+              );
           }
           if(data[0].picture){
             $("picture").html("<img src=\""+data[0].picture+"\" height=\"80\" />");
