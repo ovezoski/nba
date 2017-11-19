@@ -84,7 +84,7 @@
     <?php
     require "header.php";
       $id = $this->team;
-    
+
     ?>
 
     <div id="players">
@@ -112,7 +112,7 @@ function renderPlayers(){
             console.log(element);
             $("#players").prepend(
               "<div>"+
-              "<a href='<?= URL ?>/players/preview/"+element.id+"' >"+element.name+"</a>"+
+              "<a href='<?= URL ?>/players/preview/"+element.id+"' >"+element.firstname+ " " + element.lastname +"</a>"+
               "<img src='"+element.picture+"'/' width='100'>"+
               "</div>"
             );

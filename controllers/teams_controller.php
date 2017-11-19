@@ -13,13 +13,13 @@ class teams_controller extends Controller
   }
 
 #admin ????????????????????????
-/*
+
   public function create() #creates a new team
   {
     if(isset($_POST['team'])){
 
       if($this->model->create()){
-        header("location: ".URL." ");
+        header("location: ".URL."/admin ");
       }else{
         echo "Name not available";
       }
@@ -28,21 +28,37 @@ class teams_controller extends Controller
       $this->view->render("team");
     }
 
-    }
+  }
+
+public function delete()
+{
+print_r($_POST);
+  $this->model->delete($_POST['id']);
+}
 
   public function edit($team = false) #renders the edit team with sending id to it
   {
     # code...
+    if(isset($_POST['edit'])){
+
+      $this->model->update($team);
+      //echo $team;
+
+    }else{
+
     $edited = $this->model->getId($team);
+
     if($edited){
       $this->view->team = $edited;
-      $this->view->render("edit-team");
+      $this->view->render("admin/team");
     }
 
   }
 
-}
-*/
+  }
+
+
+
 
 #user ??????????????????????????????
 
@@ -56,8 +72,12 @@ public function view($id)
 
   public function get($team_id = false) #gets all players of a team
     {
+    if(isset($_POST['jt']) ){
+      $this->model->get($team_id, "text");
+    }else{
+      $this->model->get($team_id );
+    }
 
-      $this->model->get($team_id);
     }
 
     public function preview() #returns json of all existing teams

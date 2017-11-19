@@ -3,19 +3,7 @@
 <head>
 	<title>Home page</title>
 	<style media="screen">
-	#teams{
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-		#teams div{
-			width: 15%;
-			padding-top: 30px;
-			padding-bottom: 30px;
-			text-align: center;
-			margin: 10px;
-			background: #88f;
-			float: left;
-		}
+
 	</style>
 
 </head>
@@ -37,8 +25,9 @@
 			success: function (data) {
 				data = JSON.parse(data);
 				data.forEach(function(element){
+					console.log(element);
 					var Name =	element.id;
-					$("#teams").prepend("<a href='<?= URL ?>/teams/view/"+Name+"'><div> "+element.name+" </div>");
+					$("#teams").prepend("<a href='<?= URL ?>/teams/view/"+Name+"'><div> <img src='"+element.logo+"' width='60'> "+element.name+" </div> </a>");
 				});
 			}
 

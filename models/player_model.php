@@ -10,16 +10,46 @@ class player extends model
 
   public function create($id){
 
-    $players = $_POST["players"];
+    $firstname = $_POST["firstname"];
 
-    foreach($players as $player){
+    for($i = 0; $i < count($firstname); $i++ ){
 
-      $query = $this->db->prepare("INSERT INTO players (name, team_id) VALUES ('".$player."', '".$id."')");
-      $query->execute();
-
+      $query = $this->db->prepare("INSERT INTO players (firstname, lastname, origin, num, age, team_id, position, weight, height, debut, years) VALUES (:firstname , :lastname , :origin , :num , :age , :team_id , :position , :weight , :height , :debut, :years )");
+      $query->execute(array(
+        ':firstname' => $_POST['firstname'][$i],
+        ":lastname" => $_POST['lastname'][$i],
+        ":origin" => $_POST['origin'][$i],
+        ":num" => $_POST['num'][$i],
+        ":age" => $_POST['age'][$i],
+        ":team_id" => $id,
+        ":position" => $_POST['position'][$i],
+        ":weight" => $_POST['weight'][$i],
+        ":height" => $_POST['height'][$i],
+        ":debut" => $_POST['debut'][$i],
+        ":years" => $_POST['years'][$i]
+      ));
+print_r($_POST);
+print_r($query->errorInfo() );
 
     }
   }
+
+  public function update($id)
+  {
+    $set = "";
+    foreach($_POST as $key=>$value){
+      if($key != 'submit'){
+        if($set){
+          $set =  $set.", ";
+        }
+        $set=$set.$key." = '".$value."' ";
+      }
+    }
+
+   $update = $this->db->prepare("UPDATE players SET ".$set." WHERE id='".$_POST['id']."' ");
+   $update->execute();
+  }
+
 
   public function get($player_id= false)
   {

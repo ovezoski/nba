@@ -18,14 +18,7 @@
         margin: 10px auto;
         background: 	#E9F;
       }
-      #player > *{
-        width: 30%;
-        margin: 10px auto;
-        background: #fdd;
-        display: inline-block;
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
+
 
       .de{
         display: block;
@@ -40,34 +33,23 @@
     </style>
   </head>
   <body>
-    <?php require("header.php"); ?>
+    <?php require("/views/header.php"); ?>
 
     <div id="player">
 
       <picture>
-        <form class="" action="<?= URL ?>/players/addphoto/<?php  echo $this->player_id; ?>" method="post">
+        <form class="" action="<?= URL ?>/players/edit/<?php  echo $this->player_id; ?>" method="post">
 
-          <input type="text" name="picture-src" placeholder="Link to picture">
+          <div class="">
+            <input type="submit" name="submit" value="Save">
+          </div>
 
         </form>
-
-       <a href="<?= URL ?>/upload">Upload</a>
     </picture>
 
-      <name>
-      </name>
-
-      <team>
-
-      </team>
-
-
 
     </div>
 
-    <div id="description">
-
-    </div>
 
 
   <form class=""  method="post">
@@ -110,10 +92,12 @@
         url: "<?= URL ?>/players/get/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-          console.log(data);
-          $("#player name").html(data[0].name);
-          document.title = data[0].name;
-          $("#player team").html(data[0].team_id);
+          //console.log(Object.keys(data[0]));
+          var keys = Object.keys(data[0]);
+          for(var i = 0; i< keys.length/2; i++){
+            $("#player form").append("<input name='"+keys[keys.length/2 + i]+ "' value='" +data[0][i]+ "' /> "+keys[keys.length/2 + i]+" </br>");
+          }
+
           if(data[0].description){
             $("#description").html(
             "<form method=\"post\" action='<?= URL ?>/players/edit/<?= $this->player_id ?>'>"+
@@ -121,9 +105,11 @@
                   "<input type=\"submit\" value=\"Save\">"+
             "</form>");
           }
-          if(data[0].picture){
-            $("picture").html("<img src=\""+data[0].picture+"\" height=\"80\" />");
-          }
+
+
+
+
+
         }
       });
 
@@ -132,13 +118,14 @@
         url: "<?=URL ?>/players/getVideos/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-          console.log(data);
+
           data.forEach(function(element){
             element.link = element.link.split("watch?v=") .join("embed/")
             $("#videos").append("<iframe src='"+element.link+"'  allowfullscreen></iframe>")
           });
         }
       })
+
 
     </script>
 

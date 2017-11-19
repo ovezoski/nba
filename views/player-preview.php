@@ -84,9 +84,9 @@
         url: "<?= URL ?>/players/get/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-          console.log(data);
-          $("#player name").html(data[0].name);
-          document.title = data[0].name;
+          console.log(data[0]);
+          $("#player name").html(data[0].firstname+" " +data[0].lastname);
+          document.title = data[0].firstname + " " + data[0].lastname;
           $("#player team").html(data[0].team_id);
           if(data[0].description){
             $("#description").html(

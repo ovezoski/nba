@@ -22,10 +22,38 @@ class team extends model
       return false;
     }
     else{
-      $create_team = $this->db->prepare("INSERT INTO teams (name, players) values ('".$team_name."', 0)");
+      $create_team = $this->db->prepare("INSERT INTO teams (name, logo) values ('".$team_name."', 'https://lh3.googleusercontent.com/axHDuTtBSZikp5rxWeDSotNLGRwxKRYJw--dDzi_hqoxO9_-CRKWTqkfZ-rhmdEEig=w300')");
       $create_team->execute();
       return true;
+        print_r($create);
     }
+  }
+  public function delete($id)
+  {
+    $delete_team = $this->db->prepare("DELETE FROM teams WHERE id=:id ");
+    $delete_team->execute( array(':id' => $id ));
+    $delete_players = $this->db->prepare("DELETE FROM players WHERE team_id=:id ");
+    $delete_players->execute( array(':id' => $id ));
+  }
+  public function update($id)
+  {
+    $set = "";
+    foreach($_POST as $key=>$value){
+
+
+      if($key != "edit"){
+        if($set){
+          $set=$set.", ";
+        }
+        $set= $set.$key." = '".$value."' ";
+      }
+
+    }
+
+    $update_team = $this->db->prepare("UPDATE teams SET ".$set." WHERE id=".$id." ");
+    $update_team->execute();
+
+    header("location: ".URL."/teams/edit/".$id);
   }
 
   public function getAll()
@@ -36,16 +64,19 @@ class team extends model
     echo json_encode($get_teams->fetchAll());
   }
 
-  public function get($id = false)
+  public function get($id = false, $jt= false)
   {
-    if($id){
-        $get_players = $this->db->prepare("SELECT * FROM players WHERE team_id = $id ");
-        $get_players->execute();
-        echo json_encode($get_players->fetchAll());
 
+    if($jt){
+    $get_team = $this->db->prepare("SELECT * FROM teams WHERE id=:id ");
+    $get_team->execute(array(':id' => $id ));
+        echo json_encode($get_team->fetchAll());
 
     }else{
 
+        $get_players = $this->db->prepare("SELECT * FROM players WHERE team_id = $id ");
+        $get_players->execute();
+        echo json_encode($get_players->fetchAll());
 
     }
   }

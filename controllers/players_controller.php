@@ -13,19 +13,16 @@ class players_controller extends Controller
   {
 
 
-    if(isset($_POST["players"])  ){
+    if(isset($_POST["firstname"])  ){
       if($team){
 
 
         $this->model->create($team);
-        header("location: ".URL."/teams/edit/".$team);
+        //header("location: ".URL."/teams/edit/".$team);
 
       }else{
         die("Please suply a valid team id");
       }
-    }else{
-      echo" ens";
-        $this->view->render("players");
     }
 
 
@@ -43,8 +40,11 @@ class players_controller extends Controller
     if(isset($_POST['description'])){
       $this->model->addDescription($player_id);
     }
+    if(isset($_POST['submit']) ){
+      $this->model->update($player_id);
+    }
 
-    $this->view->render("edit-player");
+    $this->view->render("admin/player");
   }
 
   public function delete($id = false) #admin
@@ -88,7 +88,7 @@ class players_controller extends Controller
     $this->view->render("player-preview");
   }
 
-  
+
 
   public function getVideos($id=false)#user
   {

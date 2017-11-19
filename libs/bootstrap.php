@@ -18,9 +18,11 @@ class Bootstrap
 
 			if( empty($url[0]) ){
 				require "controllers/home_controller.php";
-		
-				require "views/Home.php";
+				new home_controller();
+				
+
 				return false;
+
 			}
 
 
