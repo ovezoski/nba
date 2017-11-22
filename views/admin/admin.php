@@ -2,9 +2,7 @@
 <html>
 <head>
 	<title>Home page</title>
-	<style media="screen">
 
-	</style>
 
 </head>
 <body>
@@ -40,12 +38,18 @@
 			url: "<?= URL ?>/teams/preview",
 			success: function (data) {
 				data = JSON.parse(data);
-				$("#teams").html("");
 				data.forEach(function(element){
 					var Name =	element.id;
+					$("#teams").prepend(
+					"<div class='at'>"+
+					"<a href='<?= URL ?>/teams/edit/"+element.id+"'>"+
+					"<img src='"+element.logo+"' class='logo'/>"+
+					" <span class='team-name'> "+ element.name +" </span>"+
+					"<button class='delete' rel='"+element.id+"'> X </button>"+
+					"</a>"+
+					"</div>"
+				);
 
-					console.log(element);
-					$("#teams").prepend( "<div> <a href='<?= URL ?>/teams/edit/"+element.id+"'> <img src='"+element.logo+"' width='60'> <span> "+ element.name +" </span> </a> <button class='delete' rel='"+element.id+"' > delete </button> </div>	");
 
 				});
 

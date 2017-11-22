@@ -10,12 +10,14 @@ class teams_controller extends Controller
   {
     parent::__construct();
     $this->loadModel("team");
+
   }
 
 #admin ????????????????????????
 
   public function create() #creates a new team
   {
+    session::auth();
     if(isset($_POST['team'])){
 
       if($this->model->create()){
@@ -32,15 +34,14 @@ class teams_controller extends Controller
 
 public function delete()
 {
-print_r($_POST);
+  session::auth();
   $this->model->delete($_POST['id']);
 }
 
   public function edit($team = false) #renders the edit team with sending id to it
   {
-    # code...
     if(isset($_POST['edit'])){
-
+      session::auth();
       $this->model->update($team);
       //echo $team;
 

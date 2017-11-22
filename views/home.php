@@ -25,9 +25,17 @@
 			success: function (data) {
 				data = JSON.parse(data);
 				data.forEach(function(element){
-					console.log(element);
 					var Name =	element.id;
-					$("#teams").prepend("<a href='<?= URL ?>/teams/view/"+Name+"'><div> <img src='"+element.logo+"' width='60'> "+element.name+" </div> </a>");
+					$("#teams").prepend(
+					"<a href='<?= URL ?>/teams/view/"+Name+"'>"+
+					"<div>"+
+
+					"<img src='"+element.logo+"' class='logo'> "+
+					"<span class='team-name'>"+
+						element.name+
+					"</span>"+
+					" </div>"+
+					" </a>");
 				});
 			}
 

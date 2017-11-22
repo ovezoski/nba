@@ -30,6 +30,11 @@ class Session
 
   }
 
+  public static function auth(){
+    if(!session::get("logedIn")){
+        header("location: ".URL."/login ");
+    }
+  }
 
 }
 

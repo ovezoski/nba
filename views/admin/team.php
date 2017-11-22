@@ -139,7 +139,6 @@
     success: function (data) {
       data = JSON.parse(data)[0];
       var keys = Object.keys(data);
-      console.log(data );
       for(var i = 0; i < keys.length/2; i++){
         $("#team").append("<input type='text'  name='"+keys[i+keys.length/2]+  "' value='" + data[keys[i]]+"' /> </br> ");
       }

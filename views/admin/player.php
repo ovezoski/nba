@@ -5,29 +5,24 @@
     <title></title>
     <style media="screen">
 
-      form{
-        background: skyblue;
-        padding: 10px;
-        margin: 10px auto;
-        width:50%;
-        display: block;
-      }
+
 
       #player{
         width: 90%;
         margin: 10px auto;
-        background: 	#E9F;
+        background: #eee;
+        padding-left:30%;
+        padding-right:30%;
+
+      }
+      #player> form > * {
+        display: block;
+        margin-top: 5px;
       }
 
-
-      .de{
-        display: block;
-        float: left;
-        width: 50%;
-        position: absolute;
-        top: 10%;
-        left: 1%;
-        background: white;
+      select, input{
+        width: 30%;
+        height: 20px;
       }
 
     </style>
@@ -37,15 +32,16 @@
 
     <div id="player">
 
-      <picture>
+
         <form class="" action="<?= URL ?>/players/edit/<?php  echo $this->player_id; ?>" method="post">
+
 
           <div class="">
             <input type="submit" name="submit" value="Save">
           </div>
 
         </form>
-    </picture>
+
 
 
     </div>
@@ -62,19 +58,7 @@
 
 
 
-<form action="<?= URL ?>/players/image" enctype="multipart/form-data" method="post">
 
-  <input type='file'>
-  <select>
-    <option>Point Guard</option>
-    <option>Shooting Guard</option>
-    <option>Power Forward</option>
-    <option>Small Forward</option>
-    <option>Center</option>
-
-  <select>
-
-</form>
 
   <div id="videos">
 
@@ -92,23 +76,37 @@
         url: "<?= URL ?>/players/get/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-          //console.log(Object.keys(data[0]));
           var keys = Object.keys(data[0]);
-          for(var i = 0; i< keys.length/2; i++){
-            $("#player form").append("<input name='"+keys[keys.length/2 + i]+ "' value='" +data[0][i]+ "' /> "+keys[keys.length/2 + i]+" </br>");
+          for(var i = keys.length/2; i< keys.length; i++){
+            if(keys[keys.length/2 + i] == 'description'){
+              $("#player form").append("<form method=\"post\" action='<?= URL ?>/players/edit/<?= $this->player_id ?>'>"+
+                    "<textarea id='description' name=\"description\"> "+data[0].description+"</textarea>"+
+
+              "</form>");
+            }else if( keys[i-keys.length/2] == 'position' ){
+              $("#player form").append(
+                    "<div><select name='position'>"+
+                    "<option value='1'> Point Guard </option>"+
+                    "<option value='2'> Shooting Guard </option>"+
+                    "<option value='3'> Small Forward </option>"+
+                    "<option value='4'> Power Forward </option>"+
+                    "<option value='5'> Center </option>"+
+                  "</select> </div>");
+            }else if(keys[i-keys.length/2] == 'picture'){
+				
+				$("#player form").append( "<div><input name='"+keys[keys.length/2 + i]+ "' value='" +data[0][i]+ "' /> </div>");
+				
+			}else{
+
+              $("#player form").append(
+                "<div><input name='"+keys[i]+ "' value='" +data[0][i-keys.length/2]+ "' /> "+
+                "<span>"+
+					keys[i]+
+				"</span>"+
+			  " </div>"
+			  );
+            }
           }
-
-          if(data[0].description){
-            $("#description").html(
-            "<form method=\"post\" action='<?= URL ?>/players/edit/<?= $this->player_id ?>'>"+
-                  "<textarea id='description' name=\"description\">"+data[0].description+"</textarea>"+
-                  "<input type=\"submit\" value=\"Save\">"+
-            "</form>");
-          }
-
-
-
-
 
         }
       });

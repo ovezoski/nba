@@ -2,7 +2,7 @@
 /**
  *
  */
-class login_model extends Model
+class login extends Model
 {
 
   function __construct()
@@ -22,7 +22,7 @@ class login_model extends Model
     print_r($query->rowCount());
     if($query->rowCount()){
       session::set("logedIn", true);
-      header("location: ".URL."/post/preview");
+      header("location: ".URL."/admin");
     }
   }
 

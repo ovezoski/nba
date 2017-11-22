@@ -5,73 +5,124 @@
     <title></title>
     <style media="screen">
 
-      form{
-        background: skyblue;
-        padding: 10px;
-        margin: 10px auto;
-        width:50%;
-        display: block;
-      }
+		#profile{
+			width: 95%;
+			background: #b87;
+			margin: 10px auto;
+			height: 200px;
+			position: relative;
+		}
+		.picture{
+			width: 100px;
+			height: 100px;
+			display: inline-block;
+			position: absolute;
+			bottom: 5%;
+			left: 5%;
+}
+		.profile-info{
+			display: inline-block;
+			color: white;
+			position: absolute;
+			bottom: 25%;
+			left: 20%;
+		}
+		.firstname{
+			font-size: 1.2em;
+		}
+		.lastname{
+			font-size: 2em;
+			font-weight: bold;
+		}
 
-      #player{
-        width: 90%;
-        margin: 10px auto;
-        background: 	#E9F;
-      }
-      #player > *{
-        width: 30%;
-        margin: 10px auto;
-        background: #fdd;
-        display: inline-block;
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
 
-      .de{
-        display: block;
-        float: left;
-        width: 50%;
-        position: absolute;
-        top: 10%;
-        left: 1%;
-        background: white;
-      }
+		#bv{
+			background: white;
+			width: 95%;
+			margin: auto;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			}
+		#bio{
+			width: 48%;
+			border-right: 1px solid #aaa;
+			display: inline-block;
+		}
+
+		.property{
+			color: #aaa;
+			text-transform: uppercase;
+			font-weight: 550;
+		}
+
+		.value{
+			font-size: 1.2em;
+			color: #444;
+		}
+
+		#bio > div{
+			border-bottom: 2px solid #aaa;
+			width: 90%;
+			margin: auto;
+			height: 40px;
+		}
+		#bio > div > span{
+			width: 50%;
+			display: inline-block;
+		}
+
+		#videos{
+			display: inline-block;
+			width: 49%;
+			overflow-y: scroll;
+			height: 180px;
+			position: absolute;
+			margin-top: 10px;
+		}
+		#videos > *{
+			border: none;
+			width: 98%;
+			display: inline-block;
+		}
+
+		#description{
+			width: 93%;
+			margin: 10px auto;
+			background: white;
+			padding: 1%;
+
+		}
 
     </style>
   </head>
   <body>
     <?php require("header.php"); ?>
 
-    <div id="player">
-
-      <picture>
-
-    </picture>
-
-      <name>
-      </name>
-
-      <team>
-
-      </team>
-
-
+    <div id="profile">
 
     </div>
+
+	<div id='bv'>
+
+		<div id="bio">
+
+		</div>
+
+		<div id='videos'>
+
+		</div>
+
+	</div>
 
     <div id="description">
+	<h3> PLAYER DESCRIPTION </h3>
 
     </div>
 
 
 
 
-
-
-  <div id="videos">
-
-  </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript">
 
@@ -83,19 +134,75 @@
         type: "GET",
         url: "<?= URL ?>/players/get/<?= $this->player_id ?>",
         success: function(data){
-          data = JSON.parse(data);
-          console.log(data[0]);
-          $("#player name").html(data[0].firstname+" " +data[0].lastname);
-          document.title = data[0].firstname + " " + data[0].lastname;
-          $("#player team").html(data[0].team_id);
-          if(data[0].description){
-            $("#description").html(
-                "<div id='description' name=\"description\">"+data[0].description+"</div>"
-              );
-          }
-          if(data[0].picture){
-            $("picture").html("<img src=\""+data[0].picture+"\" height=\"80\" />");
-          }
+          player = JSON.parse(data)[0];
+			$("#profile").html(
+
+			"<img src='"+player.picture+"' class='picture' />"+
+
+			"<div class='profile-info'>"+
+				"<div class='np'>"+
+					"<span> #"+  player.num+ "</span> | "+
+					"<span>"+  player.position+ "</span>"+
+
+				"</div>"+
+
+				"<div class='name'>"+
+
+					"<div class ='firstname'>"+ player.firstname +"</div>"+
+					"<div class ='lastname'>"+ player.lastname +"</div>"+
+
+
+				"</div>"+
+				"</div>"
+
+
+			);
+
+			$("#bio").html(
+
+			"<div class='metrics'>"+
+				"<span class='property'> Height: </span>"+
+				"<span class='height'> " + player.height + "cm </span>"+
+
+				"<span class='property'> Weight: </span>"+
+				"<span class='weight'>" + player.weight + "kg </span>"+
+			"</div>"+
+
+			"<div class='age'>"+
+
+				"<span class='property'> Age </span>"+
+				"<span class='value'>"+ player.age +"</span>"+
+
+			"</div>"+
+
+			"<div class='from'>"+
+
+				"<span class='property'> From </span>"+
+				"<span class='value'>"+ player.origin +"</span>"+
+
+			"</div>"+
+
+			"<div class='debut'>"+
+
+				"<span class='property'> NBA debut </span>"+
+				"<span class='value'>"+ player.age +"</span>"+
+
+			"</div>"+
+
+			"<div class='years'>"+
+
+				"<span class='property'> Years in NBA </span>"+
+				"<span class='value'>"+ player.age +"</span>"+
+
+			"</div>"
+
+
+			);
+
+			if(player.description){
+				$("#description").append(player.description);
+
+			}
         }
       });
 
@@ -104,7 +211,6 @@
         url: "<?=URL ?>/players/getVideos/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-          console.log(data);
           data.forEach(function(element){
             element.link = element.link.split("watch?v=") .join("embed/")
             $("#videos").append("<iframe src='"+element.link+"'  allowfullscreen></iframe>")

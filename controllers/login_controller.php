@@ -10,6 +10,7 @@ class Login_controller extends controller
   {
     # code...
     parent::__construct();
+    $this->loadModel("login");
     $this->view->render("login");
   }
 
@@ -21,10 +22,12 @@ class Login_controller extends controller
 
   public function logout($value='')
   {
-    login_model::logout();
+    login::logout();
     header("location: ".URL."/home/");
 
   }
+
+
 
 }
 

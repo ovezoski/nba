@@ -23,7 +23,7 @@
     background: #5c95e3;
   }
   a{
-    color: inherit;
+    color: inherit !important;
     text-decoration: none;
   }
 
@@ -34,7 +34,7 @@
     display: block;
     padding-bottom: 10px;
   }
-    #teams > div, #teams > a > div{
+     #teams > a > div, .at{
       width: 48%;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -45,10 +45,31 @@
       display: inline-block;
       border: 1px solid #ddd;
     }
-    #teams > div > *{
-      margin-left: 20px;
+    .team-name{
+		text-align:center;
+		padding-top: 30px;
+		padding-bottom:30px;
+		display: inline-block;
+		margin-left: 5%;
+		position: absolute;
     }
 
+	.logo{
+		margin-left: 2%;
+		display: inline-block;
+		width: 70px;
+		height: 70px;
+	}
 
+  .delete{
+    background: red;
+    border: none;
+    color: white;
+    display: inline-block;
+    float: right;
+    margin: 30px 8%;
+    font-weight: 900;
+    border-radius: 100%;
+  }
 
 </style>
