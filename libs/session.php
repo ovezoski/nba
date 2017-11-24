@@ -34,6 +34,8 @@ class Session
     if(!session::get("logedIn")){
         header("location: ".URL."/login ");
         return false;
+    }else{
+      return true;
     }
   }
 

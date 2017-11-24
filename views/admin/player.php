@@ -122,12 +122,11 @@
 
 
           }
-          if(data[0].description){
+
             $("#player form").append(
               "<textarea style='width:100%; height: 100px' id='description' name=\"description\"> "+
               data[0].description+
               "</textarea>");
-            }
             $("#player form").append("<input id='save' type=\"submit\" name=\"submit\" value=\"Save\">");
 
         }
