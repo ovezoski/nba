@@ -9,54 +9,6 @@
   <body>
 
 
-    <style media="screen">
-
-      body{
-        background: #0b3c59;
-      }
-
-
-      #players{
-        width: 90%;
-		margin: 10px auto;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        display:block;
-		background: white;
-      }
-
-
-      #players > div{
-		  border: 1px solid #eee;
-		display: inline-block;
-		min-width: 32%;
-		text-align:center;
-		margin: 0.5%;
-	}
-
-	.firstname, .lastname{
-		color: blue;
-	}
-
-	.weight, .height{
-		font-size: 0.8em;
-		font-weight: bold;
-	}
-	.num{
-		float: left;
-		font-size: 0.8em;
-		font-weight: bold;
-		position: absolute;
-	}
-	.picture{
-		width: 100px;
-		height: 100px;
-	}
-
-
-
-
-    </style>
     <?php
     require "/views/header.php";
       $id = $this->team;

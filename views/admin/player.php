@@ -7,22 +7,41 @@
 
 
 
-      #player{
-        width: 90%;
+      #player > form{
+        width: 80%;
         margin: 10px auto;
         background: #eee;
-        padding-left:30%;
-        padding-right:30%;
-
+        padding: 20px 5% 20px 5%;
       }
       #player> form > * {
-        display: block;
+        display: inline-block;
         margin-top: 5px;
+        width: 33%;
       }
 
-      select, input{
-        width: 30%;
+      #player select, #player input{
+        width: 50%;
         height: 20px;
+        text-align: center;
+      }
+      #player > form >#save{
+        width: 50%;
+        margin: 10px auto;
+        height: 30px;
+        display: block;
+        font-size: 1.5em;
+      }
+      #video-form{
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+        background: #eee;
+        padding: 5px;
+      }
+      #video-form > *{
+        display: block;
+        margin: 10px auto;
+        width: 50%;
       }
 
     </style>
@@ -36,10 +55,6 @@
         <form class="" action="<?= URL ?>/players/edit/<?php  echo $this->player_id; ?>" method="post">
 
 
-          <div class="">
-            <input type="submit" name="submit" value="Save">
-          </div>
-
         </form>
 
 
@@ -48,12 +63,10 @@
 
 
 
-  <form class=""  method="post">
-    <div class="">
-      Add video: <input type="text" name="video" value="">
-    </div>
+  <form id="video-form"  method="post">
 
-    <input type="submit" name="" value="">
+    <input type="text" name="video" value="" placeholder='Video URL'>
+    <input type="submit" name="" value="Save video">
   </form>
 
 
@@ -78,12 +91,7 @@
           data = JSON.parse(data);
           var keys = Object.keys(data[0]);
           for(var i = keys.length/2; i< keys.length; i++){
-            if(keys[keys.length/2 + i] == 'description'){
-              $("#player form").append("<form method=\"post\" action='<?= URL ?>/players/edit/<?= $this->player_id ?>'>"+
-                    "<textarea id='description' name=\"description\"> "+data[0].description+"</textarea>"+
-
-              "</form>");
-            }else if( keys[i-keys.length/2] == 'position' ){
+         if( keys[i] == 'position' ){
               $("#player form").append(
                     "<div><select name='position'>"+
                     "<option value='1'> Point Guard </option>"+
@@ -91,22 +99,36 @@
                     "<option value='3'> Small Forward </option>"+
                     "<option value='4'> Power Forward </option>"+
                     "<option value='5'> Center </option>"+
-                  "</select> </div>");
-            }else if(keys[i-keys.length/2] == 'picture'){
-				
-				$("#player form").append( "<div><input name='"+keys[keys.length/2 + i]+ "' value='" +data[0][i]+ "' /> </div>");
-				
-			}else{
+                  "</select> <span> position </span> </div>");
+            }else if(keys[i] == 'picture'){
+
+				          $("#player form").append(
+                    "<div>"+
+                    "<input name='"+keys[i]+ "' value='" +data[0][keys[i]]+ "' />"+
+                    "<span> picture </span>"+
+                    "</div>"
+                  );
+
+			      }else if(keys[i] == 'description'){
+
+            }else{
 
               $("#player form").append(
                 "<div><input name='"+keys[i]+ "' value='" +data[0][i-keys.length/2]+ "' /> "+
-                "<span>"+
-					keys[i]+
-				"</span>"+
-			  " </div>"
-			  );
+                "<span>" + keys[i] + "</span>"+
+        			  " </div>"
+        			  );
             }
+
+
           }
+          if(data[0].description){
+            $("#player form").append(
+              "<textarea style='width:100%; height: 100px' id='description' name=\"description\"> "+
+              data[0].description+
+              "</textarea>");
+            }
+            $("#player form").append("<input id='save' type=\"submit\" name=\"submit\" value=\"Save\">");
 
         }
       });

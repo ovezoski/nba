@@ -17,41 +17,42 @@ class teams_controller extends Controller
 
   public function create() #creates a new team
   {
-    session::auth();
-    if(isset($_POST['team'])){
+    if(session::auth()){
+      if(isset($_POST['team'])){
 
-      if($this->model->create()){
-        header("location: ".URL."/admin ");
-      }else{
-        echo "Name not available";
+        if($this->model->create()){
+          header("location: ".URL."/admin ");
+        }else{
+          echo "Name not available";
+        }
+
       }
-
-    }else{
-      $this->view->render("team");
     }
 
   }
 
 public function delete()
 {
-  session::auth();
-  $this->model->delete($_POST['id']);
+  if(session::auth()){
+    $this->model->delete($_POST['id']);
+  }
 }
 
   public function edit($team = false) #renders the edit team with sending id to it
   {
-    if(isset($_POST['edit'])){
-      session::auth();
-      $this->model->update($team);
-      //echo $team;
+    if(session::auth()){
+      if(isset($_POST['edit'])){
+        $this->model->update($team);
+        //echo $team;
 
-    }else{
+      }else{
 
-    $edited = $this->model->getId($team);
+        $edited = $this->model->getId($team);
 
-    if($edited){
-      $this->view->team = $edited;
-      $this->view->render("admin/team");
+        if($edited){
+          $this->view->team = $edited;
+          $this->view->render("admin/team");
+        }
     }
 
   }

@@ -12,47 +12,51 @@ class players_controller extends Controller
    public function create($team = false)#admin
   {
 
-    session::auth();
+    if(session::auth()){
 
-    if(isset($_POST["firstname"])  ){
-      if($team){
+      if(isset($_POST["firstname"])  ){
+        if($team){
 
 
-        $this->model->create($team);
-        //header("location: ".URL."/teams/edit/".$team);
+          $this->model->create($team);
+          header("location: ".URL."/teams/edit/".$team);
 
-      }else{
-        die("Please suply a valid team id");
+        }else{
+          die("Please suply a valid team id");
+        }
       }
     }
+
 
 
   }
 
   public function edit($player_id = false) #admin
   {
-    session::auth();
-    $this->view->player_id = $player_id;
+          if(session::auth()){
+
+            $this->view->player_id = $player_id;
 
 
-    if(isset($_POST['video'])){
-      $this->model->addVideo($player_id);
-    }
+            if(isset($_POST['video'])){
+              $this->model->addVideo($player_id);
+            }
 
-    if(isset($_POST['description'])){
-      $this->model->addDescription($player_id);
-    }
-    if(isset($_POST['submit']) ){
-      $this->model->update($player_id);
-    }
 
-    $this->view->render("admin/player");
-  }
+            if(isset($_POST['submit']) ){
+              $this->model->update($player_id);
+            }
 
-  public function delete($id = false) #admin
+            $this->view->render("admin/player");
+          }
+        }
+
+  public function delete() #admin
   {
-    session::auth();
-    $this->model->delete($id);
+    if(session::auth()){
+      $this->model->delete($_POST['id']);
+    }
+
   }
 
 

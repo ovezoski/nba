@@ -15,8 +15,7 @@
       <?php endif  ?>
   </div>
 
-      <a href="<?= URL  ?>/teams/create"><div class="">  New team </div> </a>
-
+    
 <div>
   <a href="<?=URL ?>/admin"> Admin </a>
 </div>

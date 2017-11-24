@@ -201,7 +201,6 @@
 
 			if(player.description){
 				$("#description").append(player.description);
-
 			}
         }
       });

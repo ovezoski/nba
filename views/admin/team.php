@@ -11,28 +11,8 @@
 
     <style media="screen">
 
-      body{
-        background: #0b3c59;
-      }
 
-      #players{
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        display:block;
 
-      }
-
-      #players div{
-        display: inline-block;
-        width: 40%;
-        margin: 0.5%;
-        padding: 10px;
-        background: skyblue;
-      }
-      #players div *{
-        max-width: 100%;
-      }
 
 
       #add-player{
@@ -69,6 +49,18 @@
         margin-left: 5%;
 
       }
+      #edit-team{
+        width: 86%;
+        background: #eee;
+        text-align: center;
+        margin: 10px auto;
+        padding: 2%;
+      }
+      #edit-team> #team > * {
+        text-align: center;
+        margin: 5px auto;
+        width: 90%;
+      }
 
 
     </style>
@@ -78,13 +70,16 @@
     ?>
 
 
-    <form  action="<?= URL ?>/teams/edit/<?= $id ?> " method="post">
+    <form id='edit-team' action="<?= URL ?>/teams/edit/<?= $id ?> " method="post">
 
       <div id="team">
 
       </div>
-      <input type="submit" name="edit" value="t">
+
+      <input type="submit" name="edit" value="Save">
+
     </form>
+
     <div id="players">
 
     </div>
@@ -157,14 +152,39 @@ function renderPlayers(){
           $("#players").html("");
           data = JSON.parse(data);
           data.forEach(function(element){
-
             $("#players").prepend(
               "<div>"+
-              "<a href='<?= URL ?>/players/preview/"+element.id+"' >"+element.firstname+" "+ element.lastname+"</a>"+
-              "<img src='"+element.picture+"' width='60' /'>"+
-              "<a href='<?= URL ?>/players/edit/"+element.id+"' > <button>edit</button> </a>"+
-              "<button class='delete' rel='"+ element.id+"' >X</button>"+
-              "</div>"
+        "<div class='num'>"+
+        element.num+
+        "</div>"+
+
+        "<div >"+
+        "<img class='picture'src='"+element.picture+"' /'>"+
+        "</div>"+
+
+              "<a href='<?= URL ?>/players/preview/"+element.id+"' >"+
+        "<div class='firstname'>"+
+          element.firstname+
+        "</div>"+
+        "<div class='lastname'>"+
+          element.lastname+
+        "</div>"+
+       "</a>"+
+
+        "<div class='position'>"+
+          element.position+
+        "</div>"+
+
+        "<div class='metrics'>"+
+          "<span class='weight'>" + element.weight + " kg </span>| "+
+          "<span class='height'>"+ element.height+ " cm </span>"+
+        "</div>"+
+        "<div class='ed'>"+
+          "<a href='<?= URL ?>/players/edit/"+element.id+"'class='edit' > <button>edit</button> </a>"+
+          "<button class='delete' rel='"+ element.id+"' >X</button>"+
+        "</div>"+
+
+        "</div>"
             );
 
 
@@ -175,7 +195,7 @@ function renderPlayers(){
             delId = $(this).attr("rel");
             $.ajax({
               type: "POST",
-              url: "<?= URL  ?>/players/delete/"+delId,
+              url: "<?= URL  ?>/players/delete/",
               data: {
                 "id": delId
               },

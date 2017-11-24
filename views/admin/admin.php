@@ -17,7 +17,6 @@
 	<form id="new-team" action="<?= URL ?>/teams/create"  class="jumbotron" method="post">
 
 		<input type="text" id="team-name"  name="team" placeholder="Team name">
-		 <span>team logo: <input type="file" name="" value="Team logo"/></span>
 		 <input type="submit" name="" value="Create">
 
 	</form>
@@ -38,6 +37,7 @@
 			url: "<?= URL ?>/teams/preview",
 			success: function (data) {
 				data = JSON.parse(data);
+				$("#teams").html("");
 				data.forEach(function(element){
 					var Name =	element.id;
 					$("#teams").prepend(
@@ -45,8 +45,8 @@
 					"<a href='<?= URL ?>/teams/edit/"+element.id+"'>"+
 					"<img src='"+element.logo+"' class='logo'/>"+
 					" <span class='team-name'> "+ element.name +" </span>"+
-					"<button class='delete' rel='"+element.id+"'> X </button>"+
 					"</a>"+
+					"<button class='delete' rel='"+element.id+"'> X </button>"+
 					"</div>"
 				);
 

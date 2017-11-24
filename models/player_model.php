@@ -28,13 +28,10 @@ class player extends model
         ":debut" => $_POST['debut'][$i],
         ":years" => $_POST['years'][$i]
       ));
-print_r($_POST);
-print_r($query->errorInfo() );
-
     }
   }
 
-  public function update($id)
+  public function update($id)//s
   {
     $set = "";
     foreach($_POST as $key=>$value){
@@ -51,7 +48,7 @@ print_r($query->errorInfo() );
   }
 
 
-  public function get($player_id= false)
+  public function get($player_id= false)//s
   {
     if($player_id){
         $get_player = $this->db->prepare("SELECT * FROM players WHERE id = '".$player_id."' ");
@@ -68,17 +65,13 @@ print_r($query->errorInfo() );
   }
 
 
-  public function delete($id)
+  public function delete($id)//s
   {
     $delete = $this->db->prepare("DELETE FROM players WHERE id='".$id."' ");
     $delete->execute();
   }
 
-  public function addDescription($id)
-  {
-    $add_description = $this->db->prepare("UPDATE players SET description='".$_POST["description"]."' WHERE id = ".$id." ");
-    $add_description->execute();
-  }
+
 
   public function addVideo($id)
   {
@@ -89,11 +82,10 @@ print_r($query->errorInfo() );
   public function addPhoto($link, $id)
   {
     $add_link = $this->db->prepare("UPDATE players SET picture='".$link."' where id=".$id." ");
-    print_r($add_link);
     $add_link->execute();
   }
 
-  public function getVideos($id=false)
+  public function getVideos($id=false)//s
   {
     $get_videos = $this->db->prepare("SELECT * FROM videos WHERE player_id = '".$id."' ");
     $get_videos->execute();
