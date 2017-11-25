@@ -1,5 +1,5 @@
 <?php
-define("URL", "/php/index");
+define("URL", "");
 
 require "libs/database.php";
 require "libs/bootstrap.php";
