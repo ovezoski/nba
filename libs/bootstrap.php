@@ -7,41 +7,32 @@ class Bootstrap
 	{
 
 			$url = $_SERVER['REQUEST_URI'];
-
-			//$url = ltrim($url, "/php/index/");
-			$url = preg_replace('#^/php/index/#', '', $url);
-
+			$url = str_replace(str_replace("/", "", URL), "", $url);
 			$url = rtrim($url, "/");
-
-
+      $url = ltrim($url, "/");
 			$url = explode("/", $url);
 
 			if( empty($url[0]) ){
-				require "controllers/home_controller.php";
+
+      	require "controllers/home_controller.php";
 				new home_controller();
-				
+
 
 				return false;
 
 			}
 
 
-
 			$file = "controllers/".$url[0]."_controller.php";
+
 
 		if(file_exists($file) )
 		{
 
 			require $file;
-      $url[0] = $url[0]."_controller";
-
-      $controller = new $url[0];
-
-			$controller->loadModel($url[0]);
-
-
+                        $cont = $url[0]."_controller";
+                        $controller = new $cont();
 			if( isset($url[2]) ){
-
 
 				$controller->{ $url[1] }($url[2]);
 
@@ -57,7 +48,7 @@ class Bootstrap
 
 
 		}else{
-      echo $file;
+
 			die("No such ontroller ".$file);
 		}
 	}

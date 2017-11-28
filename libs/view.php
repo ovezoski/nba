@@ -10,7 +10,6 @@ class View
 	}
 
 	public function render($template){
-		
-		require "/views/".$template.".php";
+		require "views/".$template.".php";
 	}
 }

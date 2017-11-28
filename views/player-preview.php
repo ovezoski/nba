@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title></title>
     <style media="screen">
 
 		#profile{
-			width: 95%;
+			width: 98%;
 			background: #b87;
 			margin: 10px auto;
 			height: 200px;
 			position: relative;
 		}
 		.picture{
-			width: 100px;
-			height: 100px;
+width: 10%;
 			display: inline-block;
 			position: absolute;
-			bottom: 5%;
+			bottom: 0;
 			left: 5%;
 }
 		.profile-info{
@@ -38,7 +37,7 @@
 
 		#bv{
 			background: white;
-			width: 95%;
+			width: 98%;
 			margin: auto;
 			padding-top: 20px;
 			padding-bottom: 20px;
@@ -86,7 +85,7 @@
 		}
 
 		#description{
-			width: 93%;
+			width: 96%;
 			margin: 10px auto;
 			background: white;
 			padding: 1%;

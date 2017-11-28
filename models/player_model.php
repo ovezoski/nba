@@ -12,7 +12,20 @@ class player extends model
 
     $firstname = $_POST["firstname"];
 
+    foreach($_POST as $ky=>$vl){
+
+      foreach($vl as $key=>$val){
+        if(empty($val)){
+
+          $_POST[$ky][$key]= '1';
+        }
+      }
+    }
+
+
     for($i = 0; $i < count($firstname); $i++ ){
+
+
 
       $query = $this->db->prepare("INSERT INTO players (firstname, lastname, origin, num, age, team_id, position, weight, height, debut, years) VALUES (:firstname , :lastname , :origin , :num , :age , :team_id , :position , :weight , :height , :debut, :years )");
       $query->execute(array(

@@ -11,7 +11,7 @@
        if(session::get("logedIn")):  ?>
         <a href="<?= URL ?>/login/logout">Logout</a>
       <?php else: ?>
-        <a href="<?= URL ?>/login">Log in</a>
+        <a href="<?= URL ?>/login/login">Log in</a>
       <?php endif  ?>
   </div>
 

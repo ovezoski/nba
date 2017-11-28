@@ -32,7 +32,7 @@ class Session
 
   public static function auth(){
     if(!session::get("logedIn")){
-        header("location: ".URL."/login ");
+        header("location: ".URL."/login/login ");
         return false;
     }else{
       return true;

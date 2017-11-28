@@ -14,16 +14,14 @@ class players_controller extends Controller
 
     if(session::auth()){
 
-      if(isset($_POST["firstname"])  ){
+
         if($team){
 
 
           $this->model->create($team);
           header("location: ".URL."/teams/edit/".$team);
 
-        }else{
-          die("Please suply a valid team id");
-        }
+
       }
     }
 
@@ -48,6 +46,7 @@ class players_controller extends Controller
             }
 
             $this->view->render("admin/player");
+
           }
         }
 

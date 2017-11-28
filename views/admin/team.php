@@ -36,11 +36,11 @@
       }
 
       #aditional-players{
-        width: 90%;
-        background:  #328cc1;
+        width: 96%;
+        background:  #00092D;
         margin: 10px auto;
         display:block;
-        padding: 10px;
+        padding: 10px 1%;
       }
       .player{
           margin: 10px auto;
@@ -50,23 +50,37 @@
 
       }
       #edit-team{
-        width: 86%;
+        width: 94%;
         background: #eee;
         text-align: center;
         margin: 10px auto;
         padding: 2%;
       }
-      #edit-team> #team > * {
+      #edit-team> #team >*{
+        margin-top: 10px;
+
+      }
+      #edit-team> #team >* > .value {
         text-align: center;
-        margin: 5px auto;
+        display: inline-block;
         width: 90%;
+        height: 20px;
+      }
+      #edit-team .property{
+            display: inline-block;
+        width: 8%;
+        text-align:right !important;
+        text-transform: capitalize;
+        color: red;
+        margin-right: 0.5%;
       }
 
 
     </style>
     <?php
-    require "/views/header.php";
-      $id = $this->team[0][0];
+    $this->render("header");
+      $id = $this->team;
+
     ?>
 
 
@@ -87,12 +101,36 @@
     <form id="form" action="<?= URL ?>/players/create/<?= $id ?>"  method="post">
 
       <div id="aditional-players">
+        <div class="player">
+
+          <input type="text" name="firstname[]" placeholder="Firstname">
+
+          <input type="text" name="lastname[]" placeholder="Lastname">
+
+          <input type="number" name="num[]" placeholder="Number">
+          <select name="position[]">
+            <option value="1"> Point Guard </option>
+            <option value="2"> Shooting Guard </option>
+            <option value="3"> Small Forward </option>
+            <option value="4"> Power Forward </option>
+            <option value="5"> Center </option>
+          </select>
+
+          <input type="number" name="age[]" placeholder="Age">
+
+          <input type="text" name="origin[]" placeholder="From">
+          <input type="number" name="weight[]" placeholder="weight">
+          <input type="number" name="height[]" placeholder="Height (cm)">
+          <input type="number" name="debut[]" placeholder="NBA debut">
+          <input type="number" name="years[]" placeholder="Years in NBA">
+        </div>
+        <button type="button"  name="button" id="add-player">+</button>
+
+        <input type="submit" name="" value="Create">
 
       </div>
 
-      <button type="button"  name="button" id="add-player">+</button>
 
-      <input type="submit" name="" value="Create">
 
 
 </form>
@@ -135,7 +173,12 @@
       data = JSON.parse(data)[0];
       var keys = Object.keys(data);
       for(var i = 0; i < keys.length/2; i++){
-        $("#team").append("<input type='text'  name='"+keys[i+keys.length/2]+  "' value='" + data[keys[i]]+"' /> </br> ");
+        $("#team").append(
+        "<div>"+
+        "<span class='property'>"+ keys[i+keys.length/2]+":</span>"+
+        "<input type='text' class='value' name='"+keys[i+keys.length/2]+  "' value='" + data[keys[i]]+"' />"+
+        "</div> "
+      );
       }
 
     }
@@ -176,7 +219,7 @@ function renderPlayers(){
         "</div>"+
 
         "<div class='metrics'>"+
-          "<span class='weight'>" + element.weight + " kg </span>| "+
+          "<span class='weight'>" + element.weight + " kg </span> "+
           "<span class='height'>"+ element.height+ " cm </span>"+
         "</div>"+
         "<div class='ed'>"+

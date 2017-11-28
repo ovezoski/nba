@@ -9,6 +9,19 @@
 <?php $this->render("header") ?>
 
 
+<style media="screen">
+
+	#new-team{
+		width: 98%;
+		background: #00092D;
+		margin: auto;
+		padding-top: 30px;
+		padding-bottom: 30px;
+		text-align: center;
+	}
+
+</style>
+
 	<div id="teams">
 
 	</div>

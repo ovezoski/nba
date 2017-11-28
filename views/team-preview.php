@@ -10,7 +10,9 @@
 
 
     <?php
-    require "/views/header.php";
+
+$this->render("header");
+
       $id = $this->team;
     ?>
 

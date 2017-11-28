@@ -47,7 +47,7 @@
     </style>
   </head>
   <body>
-    <?php require("/views/header.php"); ?>
+    <?php $this->render("header"); ?>
 
     <div id="player">
 

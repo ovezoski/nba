@@ -9,8 +9,8 @@ class teams_controller extends Controller
   function __construct()
   {
     parent::__construct();
-    $this->loadModel("team");
 
+    $this->loadModel("team");
   }
 
 #admin ????????????????????????
@@ -43,16 +43,13 @@ public function delete()
     if(session::auth()){
       if(isset($_POST['edit'])){
         $this->model->update($team);
-        //echo $team;
-
       }else{
 
         $edited = $this->model->getId($team);
 
-        if($edited){
-          $this->view->team = $edited;
+          $this->view->team = $team;
           $this->view->render("admin/team");
-        }
+        
     }
 
   }
@@ -66,9 +63,12 @@ public function delete()
 
 public function view($id)
 {
+
   # display team players
   $this->view->team = $id;
+
   $this->view->render("team-preview");
+
 }
 
 

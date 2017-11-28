@@ -4,13 +4,13 @@
     padding: 0px;
     margin: 0;
     background: #ccc;
-    font-family: "Verdana";
+    font-family: "Helvetica","Verdana";
   }
 
   #header{
     display: block;
     width:100%;
-    background: #317ee7;
+    background:#1d428a;
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -20,7 +20,7 @@
     display: inline-block;
     margin-left: 20px;
     color: white;
-    background: #5c95e3;
+
   }
   a{
     color: inherit !important;
@@ -28,7 +28,7 @@
   }
 
   #teams{
-    width: 90%;
+    width: 98%;
     margin: 10px auto;
     background-color: #fff;
     display: block;
@@ -65,7 +65,7 @@
 
 
   #players{
-    width: 90%;
+    width: 98%;
 margin: 10px auto;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -75,16 +75,30 @@ background: white;
 
 
   #players > div{
-  border: 1px solid #eee;
 display: inline-block;
-min-width: 32%;
+width: 5cm;
 text-align:center;
 margin: 0.5%;
 position: relative;
 }
 
-.firstname, .lastname{
-color: blue;
+#players > div > a > .firstname, #players > div > a >  .lastname{
+  color: #0B5BE1;
+  font-size: 0.9em;
+  font-weight:650;
+}
+
+#players > div  .picture{
+  width: 90%;
+display: block;
+border-radius: 100%;
+margin: 10px auto;
+}
+#players > div> .position{
+  margin-top: 20px;
+}
+#players > div> .metrics{
+  margin-top: 5px;
 }
 
 .weight, .height{
@@ -96,10 +110,8 @@ float: left;
 font-size: 0.8em;
 font-weight: bold;
 position: absolute;
-}
-.picture{
-width: 100px;
-height: 100px;
+top: 3px;
+left: 3px;
 }
 .ed{
   position: absolute;
@@ -121,5 +133,4 @@ height: 100px;
   font-weight: 900;
   border-radius: 100%;
 }
-
 </style>

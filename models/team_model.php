@@ -88,8 +88,6 @@ class team extends model
       $find_team = $this->db->prepare("Select id from teams where id='".$team."' ");
       $find_team->execute();
       if($find_team->rowCount()){
-
-
         return $find_team->fetchAll();
       }else{
         echo "No such team";
