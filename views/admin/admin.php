@@ -14,25 +14,45 @@
 	#new-team{
 		width: 98%;
 		background: #00092D;
-		margin: auto;
-		padding-top: 30px;
-		padding-bottom: 30px;
+		margin: 10px auto;
+		padding-bottom: 10px;
 		text-align: center;
+	}
+	#new-team > h1{
+		color: white;
+		text-align: center;
+		margin: 5px auto;
+	}
+	#new-team > #team-name{
+		width: 40%;
+		height: 30px;
+	}
+	input:last-child{
+		border: none !important;
+		font-weight: bold;
+		border-radius: 15%;
+		padding: 5px;
+		font-size: 1em;
 	}
 
 </style>
+
+<form id="new-team" action="<?= URL ?>/teams/create"  class="jumbotron" method="post">
+<h1>
+		New team
+</h1>
+
+	<input type="text" id="team-name"  name="team" placeholder="Team name">
+<br/><br/>
+	 <input type="submit" name="" value="Create">
+
+</form>
 
 	<div id="teams">
 
 	</div>
 
 
-	<form id="new-team" action="<?= URL ?>/teams/create"  class="jumbotron" method="post">
-
-		<input type="text" id="team-name"  name="team" placeholder="Team name">
-		 <input type="submit" name="" value="Create">
-
-	</form>
 
 
 

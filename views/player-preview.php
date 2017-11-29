@@ -11,6 +11,11 @@
 			margin: 10px auto;
 			height: 200px;
 			position: relative;
+      background: #1d428a; /* Old browsers */
+      background: -moz-linear-gradient(left, #1d428a 0%, #1d428a 60%, #399ae5 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, #1d428a 0%,#1d428a 60%,#399ae5 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, #1d428a 0%,#1d428a 60%,#399ae5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d428a', endColorstr='#399ae5',GradientType=1 );
 		}
 		.picture{
 width: 10%;

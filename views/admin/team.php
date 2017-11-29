@@ -25,6 +25,7 @@
         font-size: 40px;
         margin: 5px auto;
         display: block;
+        text-align: center;
       }
       #add-player:focus, button:focus {
         outline:none;
@@ -94,9 +95,6 @@
 
     </form>
 
-    <div id="players">
-
-    </div>
 
     <form id="form" action="<?= URL ?>/players/create/<?= $id ?>"  method="post">
 
@@ -130,10 +128,12 @@
 
       </div>
 
-
-
-
 </form>
+
+<div id="players">
+
+</div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 

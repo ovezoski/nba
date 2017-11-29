@@ -1,5 +1,11 @@
 <style media="screen">
 
+input[type=submit]{
+  margin: 8px auto;
+  display: block;
+  font-size: 1em;
+}
+
   body{
     padding: 0px;
     margin: 0;

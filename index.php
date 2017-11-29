@@ -1,5 +1,5 @@
 <?php
-define("URL", "/phpheroku");
+define("URL", "/php");
 require "libs/database.php";
 require "libs/bootstrap.php";
 require "libs/view.php";
