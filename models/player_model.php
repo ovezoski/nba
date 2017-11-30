@@ -86,12 +86,7 @@ class player extends model
 
 
 
-  public function addVideo($id)
-  {
-    $video = $_POST['video'];
-    $add_video = $this->db->prepare("INSERT INTO videos (player_id, link) VALUES('".$id."', '".$video."')");
-    $add_video->execute();
-  }
+
   public function addPhoto($link, $id)
   {
     $add_link = $this->db->prepare("UPDATE players SET picture='".$link."' where id=".$id." ");

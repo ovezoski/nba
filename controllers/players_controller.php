@@ -36,9 +36,7 @@ class players_controller extends Controller
             $this->view->player_id = $player_id;
 
 
-            if(isset($_POST['video'])){
-              $this->model->addVideo($player_id);
-            }
+        
 
 
             if(isset($_POST['submit']) ){

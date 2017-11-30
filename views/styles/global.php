@@ -82,7 +82,8 @@ background: white;
 
   #players > div{
 display: inline-block;
-width: 5cm;
+width: 19%;
+min-width: 5cm;
 text-align:center;
 margin: 0.5%;
 position: relative;

@@ -43,6 +43,14 @@
         margin: 10px auto;
         width: 50%;
       }
+      #videos > div{
+        display: inline-block;
+        width: 350px;
+        position: relative;
+      }
+      #videos .delete{
+        right: 10px
+      }
 
     </style>
   </head>
@@ -63,7 +71,7 @@
 
 
 
-  <form id="video-form"  method="post">
+  <form id="video-form"  action="<?= URL  ?>/videos/create/<?=  $this->player_id ?>" method="post">
 
     <input type="text" name="video" value="" placeholder='Video URL'>
     <input type="submit" name="" value="Save video">
@@ -131,20 +139,47 @@
 
         }
       });
+function renderVideos() {
 
       $.ajax({
         type: "GET",
         url: "<?=URL ?>/players/getVideos/<?= $this->player_id ?>",
         success: function(data){
           data = JSON.parse(data);
-
+          $("#videos").html("");
           data.forEach(function(element){
-            element.link = element.link.split("watch?v=") .join("embed/")
-            $("#videos").append("<iframe src='"+element.link+"'  allowfullscreen></iframe>")
+            element.link = element.link.split("watch?v=") .join("embed/");
+            $("#videos").append("<div class='container'> "+
+            "<iframe src='"+element.link+"'  allowfullscreen></iframe>"+
+            "<button class='delete' rel='"+element.id+"'>"+
+            "X"+
+            "</button>"+
+            "</div>"
+          )
           });
-        }
-      })
 
+          $(".delete").on("click", function() {
+
+            var did = $(this).attr('rel');
+
+            $.ajax({
+              type: 'post',
+              url: "<?= URL ?>/videos/delete",
+              data: {
+                id: did
+              },
+              success: function(da) {
+                renderVideos();
+              }
+            })
+
+          });
+
+        }
+      });
+
+    }
+    renderVideos();
 
     </script>
 

@@ -23,12 +23,20 @@
         width: 50px;
         height: 50px;
         font-size: 40px;
-        margin: 5px auto;
-        display: block;
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        margin-left:-25px;
         text-align: center;
       }
       #add-player:focus, button:focus {
         outline:none;
+      }
+      #players-form input[type=submit]{
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -32px;
       }
       #add-player:active, button:active{
         border: 1px solid #4C9EDE;
@@ -36,12 +44,20 @@
         background: white;
       }
 
-      #aditional-players{
+      #players-form{
         width: 96%;
         background:  #00092D;
         margin: 10px auto;
         display:block;
-        padding: 10px 1%;
+        padding: 10px 1% 80px 1%;
+        position: relative;
+      }
+      #players-form > h1{
+        color:white;
+        text-align: center;
+      }
+      #players-form select{
+        width: 173px;
       }
       .player{
           margin: 10px auto;
@@ -86,7 +102,6 @@
 
 
     <form id='edit-team' action="<?= URL ?>/teams/edit/<?= $id ?> " method="post">
-
       <div id="team">
 
       </div>
@@ -96,7 +111,8 @@
     </form>
 
 
-    <form id="form" action="<?= URL ?>/players/create/<?= $id ?>"  method="post">
+    <form id="players-form" action="<?= URL ?>/players/create/<?= $id ?>"  method="post">
+      <h1> Add players</h1>
 
       <div id="aditional-players">
         <div class="player">
