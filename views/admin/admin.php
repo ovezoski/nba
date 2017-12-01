@@ -12,7 +12,7 @@
 <style media="screen">
 
 	#new-team{
-		width: 98%;
+		width: 50%;
 		background: #00092D;
 		margin: 10px auto;
 		padding-bottom: 10px;

@@ -9,8 +9,8 @@ input[type=submit]{
   body{
     padding: 0px;
     margin: 0;
-    background: #ccc;
-    font-family: "Helvetica","Verdana";
+    background: #eee;
+    font-family: sans-serif;
   }
 
   #header{
@@ -34,29 +34,30 @@ input[type=submit]{
   }
 
   #teams{
-    width: 98%;
-    margin: 10px auto;
+    width: 50%;
+    margin: 40px auto;
     background-color: #fff;
     display: block;
     padding-bottom: 10px;
     position: relative;
+    font-size: 14px;
   }
      #teams > a > div, .at{
+      min-width: 130px;
       width: 48%;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      color: blue;
+      padding-top: 7px;
+      padding-bottom: 5px;
+      color: #2086bf;
       margin-top: 10px;
       margin-left: 0.7%;
       background: #fff;
       display: inline-block;
-      border: 1px solid #ddd;
       position: relative;
     }
     .team-name{
 		text-align:center;
-		padding-top: 30px;
-		padding-bottom:30px;
+		padding-top: 10px;
+		padding-bottom:10px;
 		display: inline-block;
 		margin-left: 5%;
 		position: absolute;
@@ -65,14 +66,14 @@ input[type=submit]{
 	.logo{
 		margin-left: 2%;
 		display: inline-block;
-		width: 70px;
-		height: 70px;
+		width: 45px;
+		height: 45px;
 	}
 
 
   #players{
-    width: 98%;
-margin: 10px auto;
+    width: 50%;
+    margin: 10px auto;
     padding-top: 10px;
     padding-bottom: 10px;
     display:block;
@@ -82,8 +83,8 @@ background: white;
 
   #players > div{
 display: inline-block;
-width: 19%;
-min-width: 5cm;
+width: 24%;
+
 text-align:center;
 margin: 0.5%;
 position: relative;

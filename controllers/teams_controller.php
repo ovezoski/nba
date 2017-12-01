@@ -49,7 +49,7 @@ public function delete()
 
           $this->view->team = $team;
           $this->view->render("admin/team");
-        
+
     }
 
   }
@@ -66,7 +66,6 @@ public function view($id)
 
   # display team players
   $this->view->team = $id;
-
   $this->view->render("team-preview");
 
 }
