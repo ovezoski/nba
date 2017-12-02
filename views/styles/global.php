@@ -1,10 +1,6 @@
 <style media="screen">
 
-input[type=submit]{
-  margin: 8px auto;
-  display: block;
-  font-size: 1em;
-}
+
 
   body{
     padding: 0px;
@@ -16,12 +12,12 @@ input[type=submit]{
   #header{
     display: block;
     width:100%;
-    background:#1d428a;
+    background: #0072c6;
     padding-top: 5px;
     padding-bottom: 5px;
   }
 
-  #header div{
+  #header > div{
     padding: 10px;
     display: inline-block;
     margin-left: 20px;

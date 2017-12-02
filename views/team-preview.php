@@ -9,10 +9,10 @@
 
 
     <?php
-
+$id = $this->team;
 $this->render("header");
 
-      $id = $this->team;
+
     ?>
 
 
@@ -132,18 +132,49 @@ $.ajax({
   } ,
   success: function(data) {
     data = JSON.parse(data)[0];
-    console.log(data);
+console.log(data);
     $("#team").html(
       "<img  class='logo' src='"+ data.logo +"'>"+
       "<h1>"+data.name+"</h1>"
-    )
+      <?php  if(session::get("logedIn")): ?>
+
+        +"<button class='delete' rel='"+data.id+"'> X </button>"
+        +"<input type='button' class='toggle-edit' rel='3' value='edit'>"
+    <?php endif; ?>
+    );
+
+    <?php  if(session::get("logedIn")): ?>
+
+
+
+    $(".toggle-edit").on("click", function () {
+        td(this);
+    });
+    $(".delete").click(function(){
+
+      delId = $(this).attr("rel");
+      $.ajax({
+        type: "POST",
+        url: "<?= URL  ?>/teams/delete/",
+        data: {
+          "id": delId
+        },
+        success: function(data) {
+          console.log(delId);
+          renderPlayers();
+        }
+
+      })
+
+    });
+
+    <?php endif; ?>
     document.title = data.name;
   }
 
 
 });
 
-prompt();
 
 renderPlayers();
 
@@ -205,10 +236,11 @@ $.ajax({
     data = JSON.parse(data);
     data.forEach(function(element){
       $(".teams").append(
-
         "<div>"+
-        "<img class='logo' src='"+element.logo+"'>"+
-       "<span class='name'>" + element.name+ "</span>"+
+           "<a href='<?= URL ?>/teams/view/"+element.id+"'>"+
+              "<img class='logo' src='"+element.logo+"'>"+
+              "<span class='name'>" + element.name+ "</span>"+
+            "</a>"+
 
         "</div>"
       )
@@ -218,5 +250,25 @@ $.ajax({
 
     </script>
 
+<?php if(session::get("logedIn")): ?>
+<div>
+
+
+<div style="display:none" rel='3' class="dialogue">
+  <div class="df">
+    <input type="button" class='toggle-edit' rel='3' name="button" value='X'/>
+
+    <form id="players-form" action="<?= URL ?>/players/create/<?= $this->id ?>"  method="post">
+
+    </form>
+  </div>
+
+</div>
+
+
+</div>
+
+
+<?php  endif; ?>
   </body>
 </html>

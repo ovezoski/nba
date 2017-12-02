@@ -3,34 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
+  <style media="screen">
 
-
-
-      #player > form{
-        width: 80%;
-        margin: 10px auto;
-        background: #eee;
-        padding: 20px 5% 20px 5%;
-      }
-      #player> form > * {
-        display: inline-block;
-        margin-top: 5px;
-        width: 33%;
-      }
-
-      #player select, #player input{
-        width: 50%;
-        height: 20px;
-        text-align: center;
-      }
-      #player > form >#save{
-        width: 50%;
-        margin: 10px auto;
-        height: 30px;
-        display: block;
-        font-size: 1.5em;
-      }
       #video-form{
         width: 90%;
         margin: 20px auto;

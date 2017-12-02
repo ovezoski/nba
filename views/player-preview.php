@@ -3,104 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <title></title>
-    <style media="screen">
 
-		#profile{
-			width: 98%;
-			background: #b87;
-			margin: 10px auto;
-			height: 200px;
-			position: relative;
-      background: #1d428a; /* Old browsers */
-      background: -moz-linear-gradient(left, #1d428a 0%, #1d428a 60%, #399ae5 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(left, #1d428a 0%,#1d428a 60%,#399ae5 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to right, #1d428a 0%,#1d428a 60%,#399ae5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d428a', endColorstr='#399ae5',GradientType=1 );
-		}
-		.picture{
-width: 10%;
-			display: inline-block;
-			position: absolute;
-			bottom: 0;
-			left: 5%;
-}
-		.profile-info{
-			display: inline-block;
-			color: white;
-			position: absolute;
-			bottom: 25%;
-			left: 20%;
-		}
-		.firstname{
-			font-size: 1.2em;
-		}
-		.lastname{
-			font-size: 2em;
-			font-weight: bold;
-		}
-
-
-		#bv{
-			background: white;
-			width: 98%;
-			margin: auto;
-			padding-top: 20px;
-			padding-bottom: 20px;
-			}
-		#bio{
-			width: 48%;
-			border-right: 1px solid #aaa;
-			display: inline-block;
-		}
-
-		.property{
-			color: #aaa;
-			text-transform: uppercase;
-			font-weight: 550;
-		}
-
-		.value{
-			font-size: 1.2em;
-			color: #444;
-		}
-
-		#bio > div{
-			border-bottom: 2px solid #aaa;
-			width: 90%;
-			margin: auto;
-			height: 40px;
-		}
-		#bio > div > span{
-			width: 50%;
-			display: inline-block;
-		}
-
-		#videos{
-			display: inline-block;
-			width: 49%;
-			overflow-y: scroll;
-			height: 180px;
-			position: absolute;
-			margin-top: 10px;
-		}
-		#videos > *{
-			border: none;
-			width: 98%;
-			display: inline-block;
-		}
-
-		#description{
-			width: 96%;
-			margin: 10px auto;
-			background: white;
-			padding: 1%;
-
-		}
-
-    </style>
   </head>
   <body>
-    <?php require("header.php"); ?>
+    <?php $this->render("header");
+          $this->render("/styles/player-style");
+     ?>
+
+<div id="container">
+
+<div id='players'>
+
+</div>
+
+<div id="right">
 
     <div id="profile">
 
@@ -122,7 +38,9 @@ width: 10%;
 	<h3> PLAYER DESCRIPTION </h3>
 
     </div>
+  </div>
 
+  </div>
 
 
 
@@ -131,6 +49,8 @@ width: 10%;
     <script type="text/javascript">
 
       $("#des").val();
+
+
 
 
 
@@ -158,9 +78,25 @@ width: 10%;
 
 				"</div>"+
 				"</div>"
+        <?php  if(session::get("logedIn")): ?>
+        +"<input type='button' value='edit' class='tep' rel='4' />"+
+        "<input type='button' value='X' class='delete' />"
+
+
+
+
+        <?php endif; ?>
 
 
 			);
+
+      <?php  if(session::get("logedIn")): ?>
+
+      $(".tep").click(function () {
+        td(this);
+      });
+
+      <?php endif; ?>
 
 			$("#bio").html(
 
@@ -201,7 +137,26 @@ width: 10%;
 			"</div>"
 
 
+
 			);
+      $.ajax({
+             type: "GET",
+             url: "<?= URL?>/teams/get/"+player["team_id"],
+             success: function (players) {
+               players = JSON.parse(players);
+               players.forEach(function (player) {
+                  $("#players").append(
+
+                    "<div>"+
+                    "<a href='<?= URL ?>/players/preview/"+player.id+"' >"+
+                        player.firstname + " "+ player.lastname+
+                    "</a>"+
+                    "</div>"
+
+                  )
+               });
+             }
+           });
 
 			if(player.description){
 				$("#description").append(player.description);
@@ -222,6 +177,28 @@ width: 10%;
       })
 
     </script>
+    <?php  if(session::get("logedIn")): ?>
+
+
+
+    <div style="display:none" rel='4' class="dialogue">
+      <div class="df">
+        <input type="button" class='tep' rel='4' name="button" value='x'/>
+
+        <form id="new-team" action="<?= URL ?>/teams/create"  class="jumbotron" method="post">
+        <h1>
+            New team
+        </h1>
+
+          <input type="text" id="team-name"  name="team" placeholder="Team name">
+        <br/><br/>
+           <input type="submit" name="" value="Create">
+
+        </form>
+      </div>
+
+    </div>
+  <?php endif; ?>
 
   </body>
 </html>
